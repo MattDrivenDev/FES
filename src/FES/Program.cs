@@ -1,4 +1,5 @@
 ﻿using System;
+using FES.Engine;
 
 namespace FES
 {
@@ -14,8 +15,10 @@ namespace FES
         [STAThread]
         static void Main()
         {
-            using (var game = new Game1())
+            using (var game = new EmulatorLoop())
+            {
                 game.Run();
+            }
         }
     }
 #endif
