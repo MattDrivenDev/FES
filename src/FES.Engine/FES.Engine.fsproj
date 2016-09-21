@@ -47,8 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="Display.fs" />
     <Compile Include="Memory.fs" />
+    <Compile Include="ROM.fs" />
+    <Compile Include="Input.fs" />
     <Compile Include="CPU.fs" />
     <Compile Include="PPU.fs" />
     <Compile Include="Engine.fs" />
