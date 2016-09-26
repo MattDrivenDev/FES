@@ -3,3 +3,4 @@
 /// order to allow games to be saved. 
 module ROM
 
+let load (data:byte[]) = ()

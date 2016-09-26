@@ -18,6 +18,14 @@ Goodness knows why.
 
 In reverse date order - this will suit fine until I can be bothered to use a real blog (if ever). 
 
+### 26/09/16
+
+Mood: :smile:
+
+Just wanted to kind of play with a few ideas of how to interpret ROM bytecode into CPU instructions.
+
+Decided I think on using a data type (`F#` Sum Type) in order to represent those instructions. Each available instruction in the 6502 CPU will be accessed via a function that looks into the array (in theory the opcode will map directly as an index on that array).
+
 ### 21/09/16
 
 Mood: :smile:

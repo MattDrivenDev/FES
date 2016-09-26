@@ -9,7 +9,7 @@
 /// memory location x and $12 at memory location (x + 1). 
 module CPU
 
-open Memory
+type Index = | X | Y
 
 /// Addressing Modes
 /// The 6502 has several different addressing modes, providing different ways to access
@@ -43,7 +43,7 @@ type AddressingMode =
   /// operands are bb and cc, and ccbb contains xx and ccbb + 1 contains yy, then the real target
   /// address is yyxx. On the 6502, only JMP (Jump) uses this addressing mode and an example
   /// is JMP ($1234).
-  | Indirect
+  | Indirect of Index
 
   /// Many instructions do not require access to operands stored in memory. Examples of implied
   /// instructions are CLD (Clear Decimal Mode) and NOP (No Operation). 
@@ -80,3 +80,41 @@ type AddressingMode =
   /// xx and 00bb + 1 is yy, then the data can be found at yyxx. An example of this addressing
   /// mode is AND ($12),Y. 
   | IndirectIndexed
+
+/// Data type encapsulating a 6502 CPU instruction.
+type Instruction = 
+  | NOP
+  | BRK
+  | ORA of AddressingMode  
+  | ASL of AddressingMode
+  | PHP
+
+/// The 6502 Instruction Set is arranged as an array which can be accessed directly
+/// by the opcode read from memory during the CPU cycle. We'll access this from a 
+/// helper function (interpret) below so we can perform some logging etc.
+let private InstructionSet = 
+  [| (*0x00*) BRK
+     (*0x01*) ORA (Indirect X)
+     (*0x02*) NOP
+     (*0x03*) NOP
+     (*0x04*) NOP
+     (*0x05*) ORA ZeroPage 
+     (*0x06*) ASL ZeroPage
+     (*0x07*) NOP
+     (*0x08*) PHP
+     (*0x09*) ORA Immediate
+     (*0x0A*) ASL Accumulator
+     (*0x0B*) NOP
+     (*0x0C*) NOP
+     (*0x0D*) ORA Absolute
+     (*0x0E*) ASL Absolute
+     (*0x0F*) NOP |]
+
+/// Maps an byte encoded opcode into a CPU instruction
+let interpret (opcode:byte) = InstructionSet.[int opcode]
+
+/// Tick's the CPU through one cycle - reading byte's from memory to perform CPU instructions
+let cycle() = 
+  let opcode = Memory.read()
+  let instruction = interpret opcode
+  Memory.incrementPC()

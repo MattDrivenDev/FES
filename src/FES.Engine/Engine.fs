@@ -1,5 +1,6 @@
 ﻿namespace FES.Engine
 
+open System.IO
 open Microsoft.Xna.Framework
 open Microsoft.Xna.Framework.Graphics
 
@@ -14,11 +15,14 @@ type EmulatorLoop() as this =
     gdm <- new GraphicsDeviceManager(this)
     this.Content.RootDirectory <- "Content"
   
-  override this.Initialize() = ()
+  override this.Initialize() =     
+    File.ReadAllBytes("test.nes")
+    |> ROM.load    
   
   override this.LoadContent() =
     sb <- new SpriteBatch(this.GraphicsDevice)
   
-  override this.Update(time) = ()
+  override this.Update(time) = 
+    CPU.cycle()
   
   override this.Draw(time) = ()

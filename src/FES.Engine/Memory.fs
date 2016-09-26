@@ -97,3 +97,12 @@ module P =
   /// and 1 being negative. The negative flag (also known as the sign flag) is set if this sign bit
   /// is 1.
   let N = ref false
+
+/// Read's byte of data from specified memory location
+let readn (n:uint16) = RAM.[int n]
+
+/// Read's the byte of data as specified by the program counter (PC)
+let read() = !PC |> readn
+
+/// Increments the program counter (PC) by 1
+let incrementPC() = PC := !PC + 1us
