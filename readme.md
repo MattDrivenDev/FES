@@ -9,7 +9,7 @@ Goodness knows why.
 * [NES DEV Wiki](https://wiki.nesdev.com/w/index.php/Nesdev_Wiki)
 * [Nintendo Entertainment System Documentation](http://nesdev.com/NESDoc.pdf)
 * [Programming Manual](http://users.telenet.be/kim1-6502/6502/proman.html)
-* [6502 Instruction Set](http://obelisk.me.uk/6502/instructions.html)
+* [6502 Instruction Set](http://e-tradition.net/bytes/6502/6502_instruction_set.html)
 * [6502 Instruction Reference](http://obelisk.me.uk/6502/reference.html)
 * [6502 Algorithms](http://obelisk.me.uk/6502/algorithms.html)
 * [Video: Reverse Engineering the MOS 6502 CPU](https://www.youtube.com/watch?v=fWqBmmPQP40)
@@ -17,6 +17,39 @@ Goodness knows why.
 ## Journal
 
 In reverse date order - this will suit fine until I can be bothered to use a real blog (if ever). 
+
+### 27/09/16
+
+Mood: :smile:
+
+Really enjoying this.
+
+Still struggling over how I want to map data (`opcode`) to action (`instruction`) - and what that instruction should *actually* be.
+
+I thought that I was happy with using types as a sum-type lends itself to it nicely. But have considered the following too:
+
+```fsharp
+type Instruction = unit -> unit
+```
+
+Where an example instruction:
+
+```fsharp
+val LDA = AddressingMode -> unit
+```
+
+...could be partially applied within the `InstructionSet` with the appropriate `AddressingMode`...
+
+```fsharp
+let InstructionSet = 
+  [| ....
+     (*0xA9*) LDA Immediate // = unit -> unit 
+     ....|]
+```
+
+Since all (afaik) instructions will either have no effect on memory or will mutate existing memory all instructions essentially boil down to a `unit -> unit` function (`void` method with no parameters). It's a case of working out how to not need those parameters or make sure they are baked in already within the instruction set.
+
+All this of course doesn't help with **getting it done** - but you know? 
 
 ### 26/09/16
 
