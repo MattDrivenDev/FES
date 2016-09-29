@@ -18,6 +18,36 @@ Goodness knows why.
 
 In reverse date order - this will suit fine until I can be bothered to use a real blog (if ever). 
 
+### 29/09/16
+
+So I followed up on the CPU instruction set as I thought last time... and done some rather cosmetic refactoring so that the code is organised in such a way that it more closely follows the documentation found online (see above). I think that `F#` shows some merit here because of it's ability to be super terse.
+
+The program now outputs some data to the logs while running... 
+
+```
+- CPU CYCLE -------------------------------- BEGIN
+reading memory: 0x4A
+opcode: 0x19
+instruction: ORA AbY
+- CPU CYCLE ---------------------------------- END
+- CPU CYCLE -------------------------------- BEGIN
+reading memory: 0x4B
+opcode: 0x8E
+instruction: STX Abs
+- CPU CYCLE ---------------------------------- END
+- CPU CYCLE -------------------------------- BEGIN
+reading memory: 0x4C
+opcode: 0xEE
+instruction: INC Abs
+- CPU CYCLE ---------------------------------- END
+```
+
+At the moment the program is running through the program data from RAM, which is incorrect - I need to flesh out the `MemoryMap` a little more so that it can map addresses to both RAM and the 1 or 2 banks of PRG DATA in the ROM itself. There is some further mapping that will also need to be done for that later as well, and as far as I know some swapping of banks of memory in the ROM for games larger than two 16KB blocks of PRG DATA.
+
+There [seems some debate](http://forums.nesdev.com/viewtopic.php?t=3677) where the `PC` should start - either `0x8000` which is where the 1st bank of PGR DATA seems to start, or at some kind of *initializer* location in memory that runs a few instructions before jumping to the correct starting location for the ROM itself.
+
+Lunchtimes need to be longer...
+
 ### 27/09/16
 
 Mood: :smile:
