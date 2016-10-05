@@ -18,6 +18,12 @@ Goodness knows why.
 
 In reverse date order - this will suit fine until I can be bothered to use a real blog (if ever). 
 
+### 05/10/16
+
+Mood: :smile:
+
+So I've a new computer at home now which means that I can cut some code in a more serious way on this project. Looking forwards to getting my head into it a little more.
+
 ### 29/09/16
 
 So I followed up on the CPU instruction set as I thought last time... and done some rather cosmetic refactoring so that the code is organised in such a way that it more closely follows the documentation found online (see above). I think that `F#` shows some merit here because of it's ability to be super terse.
