@@ -292,7 +292,7 @@ let private _______ = ignore
 /// this from a helper function (interpret) below so we can perform some 
 /// logging etc.
 /// NOTE: Layout is just so that it more closely resembles the instruction set grid here: 
-/// http://e-tradition.net/bytes/6502/6502_instruction_set.html
+/// https://www.masswerk.at/6502/6502_instruction_set.html
 let private InstructionSet = 
   [| BRK Imp;  ORA InX;  _______;  _______;  _______;  ORA Zpg;  ASL Zpg;  _______;  PHP Imp;  ORA Imm;  ASL Acc;  _______;  _______;  ORA Abs;  ASL Abs;  _______     
      BPL Rel;  ORA InY;  _______;  _______;  _______;  ORA ZpX;  ASL ZpX;  _______;  CLC Imp;  ORA AbY;  _______;  _______;  _______;  ORA AbX;  ASL AbX;  _______     
